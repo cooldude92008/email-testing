@@ -18,9 +18,7 @@ node {
          }
     stage('static_code_analysis') 
         {
-        //Testing email for failure condition(Uncomment below line only for testing)
-        //bat 'exit 1'
-            try {    
+                
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
@@ -39,20 +37,7 @@ node {
                 
             }
          
-        }  catch (all) {
-//                     mail subject: "${env.JOB_NAME}#${env.BUILD_NUMBER} - Failed",
-//                          body: """
-//                  Build: ${env.BUILD_URL}
-
-//                  Error message: 
-//                  ${e.getMessage()}
-
-//                  Stack Trace:
-//                  ${e.getStackTrace().join('\n')}
-//                          """,
-//                          to: 'mohankrishnavenkata82@email.com'
-
-                    //throw e // rethrow the error so that it gets printed in the job log, and so the job fails
+        }  
   
             
         stage('send_email') 
@@ -71,9 +56,9 @@ node {
              replyTo: '', 
              subject: "Status of Pipeline: -> ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
              to: "mohankrishnavenkata82@gmail.com"; 
-            }
+            
             }            
         }
      
     
-    }
+    
