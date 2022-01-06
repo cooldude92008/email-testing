@@ -44,7 +44,7 @@ node {
          {
              //Using Extended E-mail Notification plug in
              emailext attachLog: true,
-                 body: 'Status of the pipeline ${env.JOB_NAME}', 
+                 body: 'Status of the pipeline', 
                  recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
                  subject: 'Jenkins emailext Status of Csharp-pipeline-as-code'
              
