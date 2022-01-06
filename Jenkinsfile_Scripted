@@ -62,12 +62,12 @@ node {
                 
                 stage('Writing html file')
                     {
-                    sh 'echo "<html>" >> myfile.html'
-                    sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
-                    sh 'echo "<body> how do you do? </body>" >> myfile.html'
-                    sh 'echo "</html>" >> myfile.html'
-                    sh 'ls -al myfile.html'
-                    sh 'head -1 myfile.html'
+                    bat 'echo "<html>" >> myfile.html'
+                    bat 'echo "<header><title> This is the title</title></header>" >> myfile.html'
+                    bat 'echo "<body> how do you do? </body>" >> myfile.html'
+                    bat 'echo "</html>" >> myfile.html'
+                    //bat 'ls -al myfile.html'
+                    //bat 'head -1 myfile.html'
                     }
                     stage('Email')
                     {
