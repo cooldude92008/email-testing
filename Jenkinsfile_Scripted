@@ -59,7 +59,8 @@ node {
             
             } 
             
-            stage('Writing html file')
+                }
+                stage('Writing html file')
         {
         sh 'echo "<html>" >> myfile.html'
         sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
@@ -76,7 +77,7 @@ node {
         subject: currentBuild.currentResult + " : " + env.JOB_NAME,
         to: 'mohankrishnavenkata82@gmail.com'
         }   
-    }
+
         }
      
     
