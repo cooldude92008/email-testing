@@ -43,10 +43,10 @@ node {
         stage('send_email') 
          {
              //Using Extended E-mail Notification plug in
-//             emailext attachLog: true,
-//                 body: 'Failed in sonar scanner stage', 
-//                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
-//                 subject: 'ERROR in Csharp-pipeline-as-code'
+             emailext attachLog: true,
+                 body: 'Status of the pipeline ${env.JOB_NAME}', 
+                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
+                 subject: 'Status of Csharp-pipeline-as-code'
              
              //Using jenkins default Email notifications
              mail bcc: '', 
