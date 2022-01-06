@@ -46,7 +46,7 @@ node {
              emailext attachLog: true,
                  body: 'Status of the pipeline ${env.JOB_NAME}', 
                  recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
-                 subject: 'Status of Csharp-pipeline-as-code'
+                 subject: 'Jenkins emailext Status of Csharp-pipeline-as-code'
              
              //Using jenkins default Email notifications
              mail bcc: '', 
@@ -54,7 +54,7 @@ node {
              cc: '', charset: 'UTF-8', 
              from: '', mimeType: 'text/html', 
              replyTo: '', 
-             subject: "Status of Pipeline: -> ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
+             subject: "Jenkins mail-- Status of Pipeline: -> ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
              to: "mohankrishnavenkata82@gmail.com"; 
             
             }            
