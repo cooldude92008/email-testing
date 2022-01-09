@@ -1,45 +1,20 @@
 node {
-    stage('checkout') 
-       {
-           
-        // Check out the C sharp code from a GitHub repository by using below pipeline syntax command
-         git_Url = "https://github.com/mohankrishna1990/email-testing.git"
-         
-         //Below command is used to check Git URL
-         checkout([$class: 'GitSCM',
-                   branches: [[name: '*/master']], 
-                   extensions: [],
-                   userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
-         }
-    stage('static_code_analysis') 
-        {
-                
-        msbuildHome = tool 'MSbuild_Home'
-        scannerHome = tool 'SonarScanner_MSBuild'
-        sonar_url = "http://localhost:9000"
-        sonar_project_token = "8e33859cac28e6fadfb5d2abe1e0a44d1300caf7"
-            
-            withSonarQubeEnv() 
-            {
-            //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
-            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:email-testing /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
-            //Below command is used to generate the nuget package for rebbuild
-            bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
-            //Below command is used to build the application
-            bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
-            //Below command is used to end the sonar scanner which we have begin in first step
-            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-            //bat "\"$[{Quality Gate Status}(http://localhost:9000/api/project_badges/measure?project=email-testing&metric=alert_status&token=8e33859cac28e6fadfb5d2abe1e0a44d1300caf7")
-            //]"http://localhost:9000/dashboard?id=email-testing"
-                
-            }
-        } 
-        stage("Quality Gate"){
-        timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-        def qg = waitForQualityGate("http://localhost:9000/api/project_badges/measure?project=email-testing&metric=alert_status&token=8e33859cac28e6fadfb5d2abe1e0a44d1300caf7") // Reuse taskId previously collected by withSonarQubeEnv
-        if (qg.status != 'OK') {
-        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+  stage('SCM') {
+    git 'https://github.com/mohankrishna1990/email-testing.git'
+  }
+  stage('SonarQube analysis') {
+    withSonarQubeEnv('My SonarQube Server') {
+      // 'mvn clean package sonar:sonar'
+    } // submitted SonarQube taskId is automatically attached to the pipeline context
+  }
+}
+  
+// No need to occupy a node
+stage("Quality Gate"){
+  timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+    def qg = waitForQualityGate(http://localhost:9000/api/project_badges/measure?project=email-testing&metric=alert_status&token="8e33859cac28e6fadfb5d2abe1e0a44d1300caf7") // Reuse taskId previously collected by withSonarQubeEnv
+    if (qg.status != 'OK') {
+      error "Pipeline aborted due to quality gate failure: ${qg.status}"
     }
   }
-        
-      }
+}
