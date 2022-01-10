@@ -45,11 +45,11 @@ node {
             <P>Check the console at "<a href="${env.RUN_DISPLAY_URL}">${env.JOB_NAME}  [${env.BUILD_NUMBER}]</a>"</p>""",
             to:"mohankrishnavenkata82@gmail.com"
             
-            emailext body: 'Check console output at $BUILD_URL to view the results.${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                     to: "mohankrishnavenkata82@gmail.com", 
-                     subject: "Build ${currentBuild.currentResult} in Jenkins: ${JOB_NAME} - #${BUILD_NUMBER}"
+            //emailext body: 'Check console output at $BUILD_URL to view the results.${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+              //       to: "mohankrishnavenkata82@gmail.com", 
+                //     subject: "Build ${currentBuild.currentResult} in Jenkins: ${JOB_NAME} - #${BUILD_NUMBER}"
             
-            
+            }
            
           }
           //stage("Quality Gate"){
