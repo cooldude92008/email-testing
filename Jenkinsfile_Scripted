@@ -46,6 +46,12 @@ node {
             to:"mohankrishnavenkata82@gmail.com"
             )
             
+            
+            emailext body: 'Check console output at $BUILD_URL to view the results.\n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                     to: "${EMAIL_REPORT_TO}", 
+                     subject: "Build ${currentBuild.currentResult} in Jenkins: ${JOB_NAME} - #${BUILD_NUMBER}"
+                     
+            
            
           }
           
