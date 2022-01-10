@@ -34,7 +34,7 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-            bat "\"$[{Quality Gate Status}(http://localhost:9000/api/project_badges/measure?project=email-testing&metric=alert_status&token=3d3281a810fc24942c9d30e310303e66a288bf2f)]"http://localhost:9000/dashboard?id=email-testing"
+          //  bat "\"$[{Quality Gate Status}(http://localhost:9000/api/project_badges/measure?project=email-testing&metric=alert_status&token=3d3281a810fc24942c9d30e310303e66a288bf2f)]"http://localhost:9000/dashboard?id=email-testing"
                 
             }
          
