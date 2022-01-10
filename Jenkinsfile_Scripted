@@ -32,7 +32,7 @@ node {
             //Below command is used to generate the nuget package for rebbuild
             bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
             //Below command is used to build the application
-            bat "\"${msbuildHome}\\MSBuild1.exe\" /t:Rebuild"
+            bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
           }
