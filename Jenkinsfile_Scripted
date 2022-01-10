@@ -35,6 +35,12 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
+	    
+	    
+		 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+                       if (qg.status != 'OK') {
+      error "Pipeline aborted due to quality gate failure: ${qg.status}"
+    }
           }
           catch(e) {
 			def sub = env.JOB_NAME+' - Build '+env.BUILD_NUMBER+' - FAILED'
@@ -62,10 +68,6 @@ node {
             subject: 'Build # $BUILD_NUMBER - $BUILD_STATUS!',
             to: "mohankrishnavenkata82@gmail.com"
                  
-		 def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-                       if (qg.status != 'OK') {
-      error "Pipeline aborted due to quality gate failure: ${qg.status}"
-    }
             
            
           }
