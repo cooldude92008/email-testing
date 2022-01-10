@@ -38,10 +38,16 @@ node {
                 
             }
         }        
-            //stage("test email"){
-          // emailext attachLog: true, body: 'Test email from scripted pipelines', compressLog: true, replyTo: 'Test email from scripted pipelines', subject: 'Test email from scripted pipelines', to: 'mohankrishnavenkata82@gmail.com'
+            stage("test email"){
+            emailext(
+            subject:"Job Details '${env.JOB_NAME}' ",
+            body:"""<p> Started job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]'":</P>
+            <P>Check the console at "<a href="${env.RUN_DISPLAY_URL}">${env.JOB_NAME}  [${env.BUILD_NUMBER}]</a>"</p>""",
+            to:"mohankrishnavenkata82@gmail.com
+            )
+            
            
-         // }
+          }
           //stage("Quality Gate"){
           //timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
           //def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
