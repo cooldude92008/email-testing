@@ -53,7 +53,7 @@ node {
             stage("test email"){
             script {
             echo "printing environment varailable"
-	    echo " ${env}
+	    echo "${env}"
 }
 	    emailext(
             subject:"Job Details '${env.JOB_NAME}' ",
