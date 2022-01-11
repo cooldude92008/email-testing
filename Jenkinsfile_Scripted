@@ -51,7 +51,10 @@ node {
             }
         }        
             stage("test email"){
-            echo sh(returnStdout: true, script: 'env')
+            script {
+            echo "printing environment varailable"
+	    echo " ${env}
+}
 	    emailext(
             subject:"Job Details '${env.JOB_NAME}' ",
             body:"""<p> Started job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]'":</P>
