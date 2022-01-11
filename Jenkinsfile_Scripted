@@ -35,41 +35,15 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-	    
-	    
-		 //def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
-                   //    if (qg.status != 'OK') {
-      //error "Pipeline aborted due to quality gate failure: ${qg.status}"
-    //}
-          //}
-        //  catch(e) {
-	//		def sub = env.JOB_NAME+' - Build '+env.BUILD_NUMBER+' - FAILED'
-	//		emailext body: "${env.JOB_NAME} Test failed with ${e.message}", subject: sub , to: 'mohankrishnavenkata82@gmail.com'
-	//		currentBuild.result = 'UNSTABLE'
-          //}
-                
             }
         }        
             stage("test email"){
-            emailext(
+            emailext{
             subject:"Job Details '${env.JOB_NAME}' ",
             body:"""<p> Started job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]'":</P>
             <P>Check the console at "<a href="${env.RUN_DISPLAY_URL}">${env.JOB_NAME}  [${env.BUILD_NUMBER}]</a>"</p>""",
             to:"mohankrishnavenkata82@gmail.com"
-            )
-            
-            
-            emailext body: 'Check console output at $BUILD_URL to view the results.\n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                   to: "mohankrishnavenkata82@gmail.com", 
-                subject: "Build ${currentBuild.currentResult} in Jenkins: ${JOB_NAME} - #${BUILD_NUMBER}"
-                
-           // emailext body: '''${SCRIPT, template="email_report.template"}''',
-           // mimeType: 'text/html',
-            //subject: 'Build # $BUILD_NUMBER - $BUILD_STATUS!',
-            //to: "mohankrishnavenkata82@gmail.com"
-                 
-            
-           
+            }       
           }
           
         }
