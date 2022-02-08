@@ -19,7 +19,7 @@ node {
     stage('static_code_analysis') 
         {
                 
-        //msbuildHome = tool 'MSbuild'
+        msbuildHome = tool 'MS Build'
         scannerHome = tool 'SonarScanner'
         sonar_url = "http://localhost:9000"
         sonar_project_token = "8e33859cac28e6fadfb5d2abe1e0a44d1300caf7"
