@@ -1,5 +1,5 @@
 def git_Url;
-def msbuildHome;
+//def msbuildHome;
 def scannerHome;
 def sonar_url;
 def sonar_project_token;
@@ -19,7 +19,7 @@ node {
     stage('static_code_analysis') 
         {
                 
-        msbuildHome = tool 'MS_Build'
+        //msbuildHome = tool 'MS_Build'
         scannerHome = tool 'SonarScanner'
         sonar_url = "http://localhost:9000"
         sonar_project_token = "396c900134884936a0a41a9abfc075e302bae9c8"
