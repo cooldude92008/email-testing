@@ -20,7 +20,7 @@ node {
         {
                 
         msbuildHome = tool 'MS_Build'
-        scannerHome = tool 'SonarCanner'
+        scannerHome = tool 'SonarScanner'
         sonar_url = "http://localhost:9000"
         sonar_project_token = "396c900134884936a0a41a9abfc075e302bae9c8"
             
